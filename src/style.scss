@@ -1,6 +1,23 @@
-$muVar: 100%;
-$mainColor: red;
+$myVar: 100%;
+$dark: rgb(70, 70, 70);
+$light: white;
+
+html,
+body {
+    height: $myVar;
+    margin: 0;
+    padding: 0;
+}
 
 div {
     background-color: yellow;
+}
+
+body {
+    background-color: $light;
+    color: $dark;
+    &.dark {
+        background-color: $dark;
+        color: $light;
+    }
 }

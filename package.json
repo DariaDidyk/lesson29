@@ -1,5 +1,5 @@
 {
-  "name": "lesson25_front-end-main",
+  "name": "lesson29_front-end-main",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DariaDidyk/lesson25_front-end.git"
+    "url": "git+https://github.com/DariaDidyk/lesson29.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DariaDidyk/lesson25_front-end/issues"
+    "url": "https://github.com/DariaDidyk/lesson29_front-end/issues"
   },
-  "homepage": "https://github.com/DariaDidyk/lesson25_front-end#readme",
+  "homepage": "https://github.com/DariaDidyk/lesson29_front-end#readme",
   "description": "",
   "dependencies": {
     "lodash": "^4.17.20"

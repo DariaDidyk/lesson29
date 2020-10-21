@@ -1,71 +1,95 @@
+//----------------------------------------------------------------------смена темы
 
-import { fierst, get, last } from "lodash";
+const themeBtn = document.querySelector('.theme-button');
+let currentTheme = localStorage.getItem('light') ;
 
-import { last } from "lodash";
-import {drawData, sum}  from "./utils";  //дефолтные значения импортируются без скобок 
+const applyTheme = (theme) => 
+    document.body.classList.toggle('dark', currentTheme !== 'dark');
 
-const apiUrl = 'http://localhost:3000';
+applyTheme(currentTheme);
 
-const addBtn = document.getElementById('add'),
-    deleteBtn = document.getElementById('delete'),
-    wrapper = document.getElementById('data');
+themeBtn.addEventListener('click', () => {
+    currentTheme = currentTheme === 'dark'? 'light':'dark';
+    applyTheme(currentTheme);
+    localStorage.setItem('theme', currentTheme);
+});
 
-fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => drawData(data, wrapper));
-
-wrapper.addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete')) {
-        fetch(`${apiUrl}/delete?id=${e.target.dataset.userId}`)
-        .then((response) => response.json())
-        .then((data) => drawData(data, wrapper));
+window.addEventListener('storage', ({ key, newValue }) => {
+    if (key === 'theme') {
+        applyTheme(newValue);
     }
-});
+})
 
-addBtn.addEventListener('click', () => {
-    fetch(`${apiUrl}/add`)
-    .then((response) => response.json())
-    .then((data) => drawData(data, wrapper));
-});
+//----------------------------------------------------------------------front ajax
+// import { fierst, get, last } from "lodash";
 
-deleteBtn.addEventListener('click', () => {
-    // fetch(`${apiUrl}/delete`)
-    // .then((response) => response.json())
-    // .then((data) => drawData(data, wrapper));
-    getJson(`${apiUrl}/delete`).then((data) => drawData(data, wrapper));
-});
+// import { last } from "lodash";
+// import {drawData, sum}  from "./utils";  //дефолтные значения импортируются без скобок 
 
-// console.log(last([1,2,3]));
+// const apiUrl = 'http://localhost:3000';
 
-const later = (value, cb, time = 1000) => setTimeout(() => cb(value), time);
-const promisifyLater = (value, time = 1000) => 
-    new Promise((res) => later(value, res, time));
-const tab = (cb) => (value) => {
-    cb(value);
-    return value;
-};
+// const addBtn = document.getElementById('add'),
+//     deleteBtn = document.getElementById('delete'),
+//     wrapper = document.getElementById('data');
 
-const firstTask = (value) => console.log(`First: ${value}`);
-const secondTask = (value) => console.log(`Second: ${value}`);
+// fetch(apiUrl)
+//     .then((response) => response.json())
+//     .then((data) => drawData(data, wrapper));
 
-const half = (value) => value/2;
-const sqrt = (value) => Math.sqrt(value);
-// const fetchJSON = (url) => fetch(url).then((response) => response.json());
-const fetchJSON = async(url) => {
-    const response = await fetch(url);
-    return await response.json();
-};
+// wrapper.addEventListener('click', (e) => {
+//     if (e.target.classList.contains('delete')) {
+//         fetch(`${apiUrl}/delete?id=${e.target.dataset.userId}`)
+//         .then((response) => response.json())
+//         .then((data) => drawData(data, wrapper));
+//     }
+// });
 
-const syncPromise = async() => {
-    const pr = await  fetchJSON('https://rickandmortyapi.com/api/character'); //делаем с асинхрон.  в синхронное вроде
-    console.log(pr);
-};
-syncPromise();
+// addBtn.addEventListener('click', () => {
+//     fetch(`${apiUrl}/add`)
+//     .then((response) => response.json())
+//     .then((data) => drawData(data, wrapper));
+// });
 
-console.log('hello')
+// deleteBtn.addEventListener('click', () => {
+//     // fetch(`${apiUrl}/delete`)
+//     // .then((response) => response.json())
+//     // .then((data) => drawData(data, wrapper));
+//     getJson(`${apiUrl}/delete`).then((data) => drawData(data, wrapper));
+// });
+
+// // console.log(last([1,2,3]));
+
+// const later = (value, cb, time = 1000) => setTimeout(() => cb(value), time);
+// const promisifyLater = (value, time = 1000) => 
+//     new Promise((res) => later(value, res, time));
+// const tab = (cb) => (value) => {
+//     cb(value);
+//     return value;
+// };
+
+// const firstTask = (value) => console.log(`First: ${value}`);
+// const secondTask = (value) => console.log(`Second: ${value}`);
+
+// const half = (value) => value/2;
+// const sqrt = (value) => Math.sqrt(value);
+// // const fetchJSON = (url) => fetch(url).then((response) => response.json());
+// const fetchJSON = async(url) => {
+//     const response = await fetch(url);
+//     return await response.json();
+// };
+
+// const syncPromise = async() => {
+//     const pr = await  fetchJSON('https://rickandmortyapi.com/api/character'); //делаем с асинхрон.  в синхронное вроде
+//     console.log(pr);
+// };
+// syncPromise();
+
+// console.log('hello')
 
 
 
+
+//-------------------------------------------------------то что удаляли на занятии
 // const pr = promisifyLater(['','','',]); 
 // const halfPr = pr
 //             .then(curryRight(map)((element) => element + ''))
